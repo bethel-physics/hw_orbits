@@ -20,12 +20,15 @@ for istep=1:nstep
   x = state(1); y = state(2); z = state(3);
   tplot(istep) = time;  tauplot(istep) = tau;       
   xplot(istep) = x;  yplot(istep) = y;  zplot(istep) = z;
+  
   if( rem(istep,50) < 1 )
     fprintf('Finished %g steps out of %g\n',istep,nstep);
   end
 
   %* Find new state using adaptive Runge-Kutta
   [state, time, tau] = rka(state,time,tau,err,@lorzrk,param);
+  
+  % Add a non-adaptive version:
   
 end
 

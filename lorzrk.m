@@ -12,7 +12,8 @@ x = s(1); y = s(2); z = s(3);
 r = param(1); sigma = param(2); b = param(3);
 
 %* Return the derivatives [dx/dt dy/dt dz/dt]
-deriv(1) = sigma*(y-x);
-deriv(2) = r*x - y - x*z;
-deriv(3) = x*y - b*z;
+
+%deriv(1) = ?  % Refer to slides on Moodle
+%deriv(2) = ?
+%deriv(3) = ?
 return;

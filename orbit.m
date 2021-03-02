@@ -19,6 +19,7 @@ nStep = input('Enter number of steps: ');
 tau = input('Enter time step (yr): '); 
 NumericalMethod = menu('Choose a numerical method:', ...
        'Euler','Euler-Cromer','Runge-Kutta','Adaptive R-K');
+   
 for iStep=1:nStep  
 
   %* Record position and energy for plotting.
@@ -27,6 +28,17 @@ for iStep=1:nStep
   tplot(iStep) = time;
   kinetic(iStep) = .5*mass*norm(v)^2;   % Record energies
   potential(iStep) = - GM*mass/norm(r);
+  
+  if iStep == 1
+      figure(1); clf;  % Clear figure 1 window and bring forward
+      polar(thplot(iStep),rplot(iStep),'b.');  % Use polar plot for graphing orbit
+      xlabel('Distance (AU)');  grid;
+      hold on
+      pause(0.1)
+  else
+      polar(thplot(iStep),rplot(iStep),'b.');  % Use polar plot for graphing orbit
+      pause(0.1)
+  end
   
   %* Calculate new position and velocity using desired method.
   if( NumericalMethod == 1 )
@@ -53,10 +65,10 @@ for iStep=1:nStep
 end
 
 %% * Graph the trajectory of the comet.
-figure(1); clf;  % Clear figure 1 window and bring forward
-polar(thplot,rplot,'+');  % Use polar plot for graphing orbit
-xlabel('Distance (AU)');  grid;
-pause(1)   % Pause for 1 second before drawing next plot
+% figure(1); clf;  % Clear figure 1 window and bring forward
+% polar(thplot,rplot,'+');  % Use polar plot for graphing orbit
+% xlabel('Distance (AU)');  grid;
+% pause(1)   % Pause for 1 second before drawing next plot
 
 %% * Graph the energy of the comet versus time.
 figure(2); clf;   % Clear figure 2 window and bring forward

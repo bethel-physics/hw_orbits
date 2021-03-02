@@ -10,9 +10,10 @@ v0=100;
 v0=[v0*cos(theta) v0*sin(theta)];
 x=x0;
 v=v0;
-state=[x v];
+state=[x v]; % Set the initial state vector
 time=0;
 method=menu('Numerical method','Midpoint','Runge Kutta','Adaptive Runge Kutta');
+
 % Other parameters
 grav=[0,-9.8];         % acceleration of gravity
 cd = 0.35;             % drag coefficient
@@ -24,25 +25,26 @@ tau=0.1;               % time step size
 dat=[time x v];        % solution matrix
 dragconst=0.5*rho*area/mass;
 adaptErr=5e-4;
-%
+
+% Loop to compute trajectory
 counter = 0;
 while(x(2)>=0 & counter<10000)         % repeat until the projectile hits the ground
     counter = counter + 1;
     if(method==1)      % Midpoint
-        accel = grav-dragconst*v*norm(v);
+        accel = grav - dragconst*v*norm(v);
         vnew = v + tau*accel;
         x = x + tau*0.5*(v+vnew);
         v = vnew;
         time = time + tau;
     elseif(method==2)  % Runge Kutta
         % Call rk4
-        x = [state(1) state(2)];   % 4th order Runge-Kutta
-        v = [state(3) state(4)];
+        % x = ?  % extract position vector from the state vector
+        % v = ?  % extract velocity vector from the state vector
         time = time + tau; 
     else               % Adaptive Runge Kutta
         % Call rka
-        x = [state(1) state(2)];   % 4th order Runge-Kutta
-        v = [state(3) state(4)];
+        % x = ?  % extract position vector from the state vector
+        % v = ?  % extract velocity vector from the state vector
     end
     dat=[dat;time x v];
 end
